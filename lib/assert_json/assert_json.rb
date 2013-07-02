@@ -1,8 +1,10 @@
 module AssertJson
   
-  def assert_json(json_string, &block)
-    json = AssertJson::Json.new(json_string)
-    yield json if block_given?
+  module Assertions
+    def assert_json(json_string, &block)
+      json = AssertJson::Json.new(json_string)
+      yield json if block_given?
+    end
   end
 
   class Json

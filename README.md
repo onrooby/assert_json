@@ -21,18 +21,18 @@ gem 'assert_json'
 
 ```ruby
 class MyActionTest < ActionController::TestCase
-  include AssertJson
+  include AssertJson::Assertions
 
   def test_my_action
     get :my_action, :format => 'json'
     # => @response.body= '{"key":[{"inner_key1":"value1"},{"inner_key2":"value2"}]}'
     
-    assert_json(@response.body) do
-      has 'key' do
-        has 'inner_key1', 'value1'
-        has 'inner_key2', /lue2/
+    assert_json(@response.body) do |j|
+      j.has 'key' do |j|
+        j.has 'inner_key1', 'value1'
+        j.has 'inner_key2', /lue2/
       end
-      has_not 'key_not_included'
+      j.has_not 'key_not_included'
     end
   end
 
@@ -41,7 +41,7 @@ end
 
 ## Changelog ##
 
-Look at the [CHANGELOG](https://github.com/xing/assert_json/blob/master/CHANGELOG.md) for details.
+Look at the [CHANGELOG](https://github.com/onrooby/assert_json/blob/master/CHANGELOG.md) for details.
 
 ## Authors ##
 
@@ -51,6 +51,9 @@ Look at the [CHANGELOG](https://github.com/xing/assert_json/blob/master/CHANGELO
 Please find out more about our work in our 
 [Xing Dev Blog](http://devblog.xing.com/).
 
+Explicit receiver fork by
+
+[Matthias Grosser](http://github.com/mtgrosser)
 
 ## License ##
 

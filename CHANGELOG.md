@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.1
+
+ * update readme
+ * move assertion to submodule in order to shadow AssertJson::Json class name
+
 ## 1.0.0
 
   * require receiver, remove use of test instance variable

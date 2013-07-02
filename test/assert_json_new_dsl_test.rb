@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
 class AssertJsonNewDslTest < Test::Unit::TestCase
-  include AssertJson
+  include AssertJson::Assertions
 
   def test_string
     assert_json '"key"' do |j|
