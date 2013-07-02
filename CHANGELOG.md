@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.0
+
+  * require receiver, remove use of test instance variable
+  * when no block is given, assert no JSON exceptions are raised
+
 ## 0.1.2 (Unreleased)
 
 ## 0.1.1

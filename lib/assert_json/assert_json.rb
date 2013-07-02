@@ -1,25 +1,16 @@
 module AssertJson
   
   def assert_json(json_string, &block)
-    if block_given?
-      @json = AssertJson::Json.new(json_string)
-      # json.instance_exec(json, &block)
-      yield @json
-    end
-  end
-
-  def has(*args, &block)
-    @json.has(*args, &block)
-  end
-
-  def has_not(*args, &block)
-    @json.has_not(*args, &block)
+    json = AssertJson::Json.new(json_string)
+    yield json if block_given?
   end
 
   class Json
     
     def initialize(json_string)
       @decoded_json = ActiveSupport::JSON.decode(json_string)
+    rescue MultiJson::LoadError => e
+      raise_error "Invalid JSON: #{e.message}"
     end
     
     def element(*args, &block)
@@ -54,7 +45,7 @@ module AssertJson
       if block_given?
         begin
           in_scope, @decoded_json = @decoded_json, token.is_a?(Hash) ? token[arg] : token
-          yield
+          yield(self)
         ensure
           @decoded_json = in_scope
         end

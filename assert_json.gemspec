@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.description = "A gem to test JSON strings."
   s.files = Dir["{app,lib,config}/**/*"] + ["MIT-LICENSE", "Rakefile", "Gemfile", "README.md"]
 
-  s.authors = ["Thorsten Böttger", "Ralph von der Heyden"]
-  s.email = %q{boettger@mt7.de}
-  s.homepage = %q{https://github.com/xing/assert_json}
+  s.authors = ["Thorsten Böttger", "Ralph von der Heyden", "Matthias Grosser"]
+  s.email = %q{mtgrosser@gmx.net}
+  s.homepage = %q{https://github.com/onrooby/assert_json}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
