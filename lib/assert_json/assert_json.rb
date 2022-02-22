@@ -30,7 +30,7 @@ module AssertJson
           end
         end
       when Array
-        raise_error("element #{arg} not found") if token != arg
+        raise_error("element #{arg} not found") if !block_given? && token != arg
       when String
         case arg
         when Regexp
@@ -56,6 +56,16 @@ module AssertJson
     end
     alias has element
     
+    def item(index)
+      decoded_json_in_scope = @decoded_json
+      @decoded_json = @decoded_json[index]
+      begin
+        yield(self) if block_given?
+      ensure
+        @decoded_json = decoded_json_in_scope
+      end
+    end
+
     def not_element(*args, &block)
       arg = args.shift
       token = @decoded_json

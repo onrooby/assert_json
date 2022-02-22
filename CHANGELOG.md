@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.2
+
+ * add item assertion
+
 ## 1.0.1
 
  * update readme
