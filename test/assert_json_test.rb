@@ -9,7 +9,7 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_string_crosscheck
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '"key"' do |json|
         json.element 'wrong_key'
       end
@@ -32,14 +32,14 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_single_hash_crosscheck_for_key
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":"value"}' do |json|
         json.element 'wrong_key', 'value'
       end
     end
   end
   def test_single_hash_crosscheck_for_value
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":"value"}' do |json|
         json.element 'key', 'wrong_value'
       end
@@ -53,7 +53,7 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_not_element_crosscheck
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":"value"}' do |json|
         json.not_element 'key'
       end
@@ -75,21 +75,21 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_array_crosscheck_order
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '["value1","value2","value3"]' do |json|
         json.element 'value2'
       end
     end
   end
   def test_array_crosscheck_for_first_item
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '["value1","value2","value3"]' do |json|
         json.element 'wrong_value1'
       end
     end
   end
   def test_array_crosscheck_for_second_item
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '["value1","value2","value3"]' do |json|
         json.element 'value1'
         json.element 'wrong_value2'
@@ -103,12 +103,12 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_nested_arrays_crosscheck
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '[[["deep","another_depp"],["second_deep"]]]' do |json|
         json.element [["deep","wrong_another_depp"],["second_deep"]]
       end
     end
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '[[["deep","another_depp"],["second_deep"]]]' do |json|
         json.element [["deep","another_depp"],["wrong_second_deep"]]
       end
@@ -121,21 +121,21 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_hash_with_value_array_crosscheck_wrong_key
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":["value1","value2"]}' do |json|
         json.element 'wrong_key', ['value1', 'value2']
       end
     end
   end
   def test_hash_with_value_array_crosscheck_wrong_value1
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":["value1","value2"]}' do |json|
         json.element 'key', ['wrong_value1', 'value2']
       end
     end
   end
   def test_hash_with_value_array_crosscheck_wrong_value2
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":["value1","value2"]}' do |json|
         json.element 'key', ['value1', 'wrong_value2']
       end
@@ -151,7 +151,7 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_hash_with_array_of_hashes_crosscheck_inner_key
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":[{"inner_key1":"value1"},{"inner_key2":"value2"}]}' do |json|
         json.element 'key' do
           json.element 'wrong_inner_key1', 'value1'
@@ -160,7 +160,7 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_hash_with_array_of_hashes_crosscheck_inner_value
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":[{"inner_key1":"value1"},{"inner_key2":"value2"}]}' do |json|
         json.element 'key' do
           json.element 'inner_key1', 'wrong_value1'
@@ -183,13 +183,13 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_array_with_two_hashes_crosscheck
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '[{"key1":"value1"}, {"key2":"value2"}]' do |json|
         json.element 'wrong_key1', 'value1'
         json.element 'key2', 'value2'
       end
     end
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '[{"key1":"value1"}, {"key2":"value2"}]' do |json|
         json.element 'key1', 'value1'
         json.element 'key2', 'wrong_value2'
@@ -207,12 +207,12 @@ class AssertJsonTest < Test::Unit::TestCase
     end
   end
   def test_nested_hashes_crosscheck
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"outer_key":{"key":{"inner_key":"value"}}}' do |json|
         json.element 'wrong_outer_key'
       end
     end
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"outer_key":{"key":{"inner_key":"value"}}}' do |json|
         json.element 'outer_key' do
           json.element 'key' do
@@ -244,7 +244,7 @@ class AssertJsonTest < Test::Unit::TestCase
   end
 
   def test_not_enough_elements_in_array
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '["one","two"]' do |json|
         json.element "one"
         json.element "two"
@@ -254,7 +254,7 @@ class AssertJsonTest < Test::Unit::TestCase
   end
 
   def test_not_enough_elements_in_hash_array
-    assert_raises(MiniTest::Assertion) do
+    assert_raises(Minitest::Assertion) do
       assert_json '{"key":[{"key1":"value1"}, {"key2":"value2"}]}' do |json|
         json.element 'key' do
           json.element 'key1', 'value1'

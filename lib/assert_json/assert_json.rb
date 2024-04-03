@@ -81,8 +81,8 @@ module AssertJson
     private
     
       def raise_error(message)
-        if Object.const_defined?(:MiniTest)
-          raise MiniTest::Assertion.new(message)
+        if Object.const_defined?(:Minitest)
+          raise Minitest::Assertion.new(message)
         else
           raise Test::Unit::AssertionFailedError.new(message)
         end

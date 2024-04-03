@@ -1,5 +1,9 @@
 # CHANGELOG
 
+##1.0.3
+
+* Fix Minitest constant
+
 ## 1.0.2
 
  * add item assertion
